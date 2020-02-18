@@ -1,4 +1,4 @@
-import { ViewStyle } from 'react-native';
+import { GestureResponderEvent, PanResponderGestureState, ViewStyle } from 'react-native';
 
 export interface ICenterOn {
   x: number;
@@ -174,6 +174,23 @@ export class Props {
   public onSwipeDown?: () => void = () => {
     //
   };
+
+  /**
+   * Allows defining the onMoveShouldSetResponder behavior.
+   */
+  public onMoveShouldSetPanResponder?: (event: GestureResponderEvent, gestureState: PanResponderGestureState) => boolean;
+
+  /**
+   * Allows overriding the default onStartShouldSetPanResponder behavior.
+   * By default, always becomes the responder
+   */
+  public onStartShouldSetPanResponder?: (event: GestureResponderEvent, gestureState: PanResponderGestureState) => boolean = () => true;
+
+  /**
+   * Allows overriding the default onPanResponderTerminationRequest behavior.
+   * By default, doesn't terminate until the press ends
+   */
+  public onPanResponderTerminationRequest?: (event: GestureResponderEvent, gestureState: PanResponderGestureState) => boolean = () => false;
 }
 
 export class State {
